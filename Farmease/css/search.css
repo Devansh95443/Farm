@@ -1,0 +1,349 @@
+/* Logo styles */
+.farmease-logo {
+    width: 180px;
+    height: auto;
+    display: block;
+    margin: 1rem 0;
+}
+
+/* Main container styles */
+.search-container {
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 1rem;
+}
+
+/* Search bar wrapper */
+.search-bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 0.5rem;
+}
+
+/* Search input styles */
+.search-input {
+    flex: 1;
+    position: relative;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #2E7D32;
+    box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+    outline: none;
+}
+
+/* Category select styles */
+.category-select {
+    min-width: 140px;
+}
+
+#categorySelect {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.2em;
+}
+
+#categorySelect:focus {
+    border-color: #2E7D32;
+    box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+    outline: none;
+}
+
+/* Search button styles */
+#searchButton {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #2E7D32;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+#searchButton i {
+    font-size: 1rem;
+}
+
+#searchButton:hover {
+    background-color: #1B5E20;
+    transform: translateY(-1px);
+}
+
+#searchButton:active {
+    transform: translateY(0);
+}
+
+/* Search results container */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+/* Search result item */
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Product image in results */
+.search-result-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 1rem;
+}
+
+/* Product info in results */
+.search-result-info {
+    flex: 1;
+}
+
+.search-result-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.25rem;
+}
+
+.search-result-category {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.search-result-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2E7D32;
+}
+
+/* Loading state */
+.search-input.loading::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e0e0e0;
+    border-top-color: #2E7D32;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* No results state */
+.no-results {
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+}
+
+.no-results i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #999;
+}
+
+/* Error state */
+.search-error {
+    padding: 1rem;
+    text-align: center;
+    color: #dc3545;
+}
+
+.search-error i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .search-bar-wrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .category-select {
+        width: 100%;
+        min-width: unset;
+    }
+
+    #searchButton {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search-result-item {
+        padding: 0.75rem;
+    }
+
+    .search-result-image {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Dark theme support */
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --border-color: #444;
+    --hover-bg: #2d2d2d;
+}
+
+[data-theme="dark"] .search-bar-wrapper {
+    background-color: #2d2d2d;
+}
+
+[data-theme="dark"] #searchInput,
+[data-theme="dark"] #categorySelect {
+    background-color: #1a1a1a;
+    border-color: #444;
+    color: #ffffff;
+}
+
+[data-theme="dark"] .search-results {
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+}
+
+[data-theme="dark"] .search-result-item {
+    border-color: #444;
+}
+
+[data-theme="dark"] .search-result-item:hover {
+    background-color: #2d2d2d;
+}
+
+[data-theme="dark"] .search-result-title {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .search-result-category {
+    color: #999;
+}
+
+[data-theme="dark"] .no-results,
+[data-theme="dark"] .no-results i {
+    color: #999;
+}
+
+/* Custom scrollbar */
+.search-results::-webkit-scrollbar {
+    width: 10px;
+}
+
+.search-results::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+    background: #2E7D32;
+    border-radius: 10px;
+}
+
+.search-results::-webkit-scrollbar-thumb:hover {
+    background: #1B5E20;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .search-container {
+        padding: 1rem;
+    }
+
+    .search-bar-wrapper {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .category-select {
+        width: 100%;
+        min-width: unset;
+    }
+
+    #searchButton {
+        width: 100%;
+    }
+
+    .search-result-item {
+        padding: 1rem;
+    }
+
+    .search-result-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .farmease-logo {
+        width: 140px;
+        margin: 0.5rem auto;
+    }
+} 

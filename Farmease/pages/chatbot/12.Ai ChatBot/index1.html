@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmEase AI Assistant</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="chatbot-container">
+        <div class="chat-header">
+            <img src="ai.png" alt="AI Assistant" class="header-icon">
+            <span>FarmEase AI Assistant</span>
+        </div>
+        
+        <div class="chat-container">
+            <!-- Messages will be dynamically added here -->
+        </div>
+
+        <div class="input-container">
+            <input type="text" id="prompt" placeholder="Ask about farming, weather, or schemes..." aria-label="Message input">
+            <button id="submit" aria-label="Send message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+            <div id="image">
+                <input type="file" accept="image/*" hidden>
+                <img src="img.svg" alt="Upload image" title="Upload an image">
+            </div>
+        </div>
+    </div>
+
+    <script src="script1.js"></script>
+</body>
+</html>

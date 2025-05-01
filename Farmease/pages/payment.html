@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment System - Farmease</title>
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .payment-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .payment-section {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-terms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .term-item {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        input, button {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .status-completed {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .secondary-button {
+            background: #6c757d;
+        }
+        
+        .secondary-button:hover {
+            background: #5a6268;
+        }
+        
+        .primary-button {
+            background: #4CAF50;
+        }
+        
+        .primary-button:hover {
+            background: #45a049;
+        }
+        
+        #contractEditFields {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .status-message {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            background: #f8f9fa;
+        }
+        
+        .status-message.connected {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .fa-spin {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <i class="fas fa-leaf"></i>
+            <span>Farmease</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="payment.html" class="active">Payment</a></li>
+        </ul>
+    </nav>
+
+    <div class="payment-container">
+        <div class="payment-section">
+            <h2>Current Payment Terms</h2>
+            <div id="web3Status" class="status-message">
+                <i class="fas fa-circle-notch fa-spin"></i> Connecting to Web3...
+            </div>
+            <div class="payment-terms">
+                <div class="term-item">
+                    <h3>Total Amount</h3>
+                    <p id="totalAmount">0 ETH</p>
+                </div>
+                <div class="term-item">
+                    <h3>Deadline</h3>
+                    <p id="deadline">Not set</p>
+                </div>
+                <div class="term-item">
+                    <h3>Escrow Percentage</h3>
+                    <p id="escrowPercentage">0%</p>
+                </div>
+                <div class="term-item">
+                    <h3>Total Paid</h3>
+                    <p id="totalPaid">0 ETH</p>
+                </div>
+                <div class="term-item">
+                    <h3>Status</h3>
+                    <p><span id="paymentStatus" class="status-badge status-pending">Pending</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-section">
+            <h2>Set Payment Terms</h2>
+            <form id="setTermsForm">
+                <div class="form-group">
+                    <label for="amount">Amount (ETH)</label>
+                    <input type="number" id="amount" step="0.001" required>
+                </div>
+                <div class="form-group">
+                    <label for="deadlineDate">Deadline</label>
+                    <input type="date" id="deadlineDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="escrow">Escrow Percentage</label>
+                    <input type="number" id="escrow" min="0" max="100" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="installments">
+                        Allow Installment Payments
+                    </label>
+                </div>
+                <button type="submit">Set Terms</button>
+            </form>
+        </div>
+
+        <div class="payment-section">
+            <h2>Make Full Payment</h2>
+            <form id="makePaymentForm">
+                <div class="form-group">
+                    <label for="paymentAmount">Amount (ETH)</label>
+                    <input type="number" id="paymentAmount" step="0.001" required>
+                </div>
+                <button type="submit">Make Payment</button>
+            </form>
+        </div>
+
+        <div class="payment-section">
+            <h2>Make Installment Payment</h2>
+            <form id="installmentForm">
+                <div class="form-group">
+                    <label for="installmentAmount">Amount (ETH)</label>
+                    <input type="number" id="installmentAmount" step="0.001" required>
+                </div>
+                <button type="submit">Pay Installment</button>
+            </form>
+        </div>
+
+        <div class="payment-section">
+            <h2>Edit Existing Contract</h2>
+            <form id="editContractForm">
+                <div class="form-group">
+                    <label for="contractAddress">Contract Address</label>
+                    <div class="input-group">
+                        <input type="text" id="contractAddress" required placeholder="Enter contract address (0x...)">
+                        <button type="button" id="loadContractBtn" class="secondary-button">Load Contract</button>
+                    </div>
+                </div>
+                <div id="contractEditFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="newAmount">New Amount (ETH)</label>
+                        <input type="number" id="newAmount" step="0.001" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newDeadline">New Deadline</label>
+                        <input type="date" id="newDeadline" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newEscrow">New Escrow Percentage</label>
+                        <input type="number" id="newEscrow" min="0" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPaymentToken">Payment Token Address (Leave empty for ETH)</label>
+                        <input type="text" id="newPaymentToken" placeholder="0x0000...">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="newInstallments">
+                            Allow Installment Payments
+                        </label>
+                    </div>
+                    <div class="form-group" id="installmentsGroup" style="display: none;">
+                        <label for="newNumberOfInstallments">Number of Installments</label>
+                        <input type="number" id="newNumberOfInstallments" min="1" value="3">
+                    </div>
+                    <button type="submit" class="primary-button">Update Contract</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="payment-section">
+            <h2>Release Escrow</h2>
+            <button id="releaseEscrowBtn">Release Escrow</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script>
+        // Check if the page is loaded over HTTPS
+        if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+            alert('This page needs to be served over HTTPS to work with MetaMask');
+        }
+    </script>
+    <script src="../js/payment.js"></script>
+</body>
+</html> 
